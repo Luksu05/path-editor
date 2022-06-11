@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import Grid from "./Grid";
+import Grid from "./components/Grid";
+import Obstacles from "./components/Obstacles";
+import Obstacle from "./components/Obstacle";
 
 let obstacles = [];
 
@@ -39,20 +41,8 @@ const App = () => {
       >
         <rect width="100%" height="100%" fill="gray" />
         <Grid width={width} height={height} size={size} />
-        {obstacles.map((obstacle) => (
-          <polygon
-            points={obstacle
-              .map((pos) => `${pos.x * size},${pos.y * size}`)
-              .join(" ")}
-            fill="red"
-          />
-        ))}
-        <polygon
-          points={obstacle
-            .map((pos) => `${pos.x * size},${pos.y * size}`)
-            .join(" ")}
-          fill="pink"
-        />
+        <Obstacles obstacles={obstacles} size={size} />
+        <Obstacle obstacle={obstacle} size={size} />
         <circle cx={pos.x} cy={pos.y} r="5" fill="red" />
       </svg>
     </div>
