@@ -13,10 +13,9 @@ const App = () => {
   const width = 50;
   const height = 50;
   const size = 100;
-  const svg = document.getElementsByTagName("svg")[0];
 
   const handleMouse = (event) => {
-    getCoords(svg)
+    getCoords();
     setPos({
       x: Math.round(event.pageX / size) * size - posOffset.y,
       y: Math.round(event.pageY / size) * size - posOffset.x,
@@ -33,8 +32,8 @@ const App = () => {
     }
   };
 
-  const getCoords = (elem) => {
-    const box = elem.getBoundingClientRect();
+  const getCoords = () => {
+    const box = document.getElementsByTagName("svg")[0].getBoundingClientRect();
 
     const body = document.body;
     const docEl = document.documentElement;
