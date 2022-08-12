@@ -8,8 +8,9 @@ import "./App.css";
 let obstacles = [];
 
 const App = () => {
-  const [mode, setMode] = useState(1); // 0 = add obstacles, 1 = add point A, 2 = add point B.
-  const [pointA, setPointA] = useState({ x: 0, y: 0 }); 
+  const [mode, setMode] = useState(2); // 0 = add obstacles, 1 = add point A, 2 = add point B.
+  const [pointA, setPointA] = useState({ x: -20, y: 0 });
+  const [pointB, setPointB] = useState({ x: -20, y: 0 });
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [posOffset, setPosOffset] = useState({ x: 0, y: 0 });
   const [obstacle, setObstacle] = useState([]);
@@ -39,6 +40,11 @@ const App = () => {
     {
       const [x, y] = [pos.x / size, pos.y / size];
       setPointA({ x, y });
+    }
+    else if (mode === 2)
+    {
+      const [x, y] = [pos.x / size, pos.y / size];
+      setPointB({ x, y });
     }
   };
 
@@ -81,6 +87,7 @@ const App = () => {
           <Obstacles obstacles={obstacles} size={size} />
           <Obstacle obstacle={obstacle} size={size} />
           <Point pointX={pointA.x} pointY={pointA.y} size={size} color="green" />
+          <Point pointX={pointB.x} pointY={pointB.y} size={size} color="yellow" />
           <circle cx={pos.x} cy={pos.y} r="5" fill="red" />
         </svg>
       </div>
