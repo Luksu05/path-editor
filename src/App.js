@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import Grid from "./components/Grid";
 import Obstacles from "./components/Obstacles";
 import Obstacle from "./components/Obstacle";
+import Point from "./components/Point";
 import "./App.css";
 
 let obstacles = [];
 
 const App = () => {
+  const [mode, setMode] = useState(1); // 0 = add obstacles, 1 = add point A, 2 = add point B.
+  const [pointA, setPointA] = useState({ x: 0, y: 0 }); 
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [posOffset, setPosOffset] = useState({ x: 0, y: 0 });
   const [obstacle, setObstacle] = useState([]);
@@ -23,12 +26,19 @@ const App = () => {
   };
 
   const handleClick = () => {
-    const [x, y] = [pos.x / size, pos.y / size];
-    if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
-      obstacles.push(obstacle);
-      setObstacle([]);
-    } else {
-      setObstacle([...obstacle, { x, y }]);
+    if (mode === 0) {
+      const [x, y] = [pos.x / size, pos.y / size];
+      if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
+        obstacles.push(obstacle);
+        setObstacle([]);
+      } else {
+        setObstacle([...obstacle, { x, y }]);
+      }
+    }
+    else if (mode === 1)
+    {
+      const [x, y] = [pos.x / size, pos.y / size];
+      setPointA({ x, y });
     }
   };
 
@@ -49,11 +59,13 @@ const App = () => {
 
     setPosOffset({x: Math.round(top / 100) * 100, y: Math.round(left / 100) * 100});
   }
-
+  
   return (
     <div className="maindiv">
-      <header>
-        <h1>{width}</h1>
+      <header className="container">
+        <h1>Make obstacles</h1>
+        <h1>Add point A</h1>
+        <h1>Add point B</h1>
       </header>
       <div className="innerdiv">
         <svg
@@ -68,6 +80,7 @@ const App = () => {
           <Grid width={width} height={height} size={size} />
           <Obstacles obstacles={obstacles} size={size} />
           <Obstacle obstacle={obstacle} size={size} />
+          <Point pointX={pointA.x} pointY={pointA.y} size={size} color="green" />
           <circle cx={pos.x} cy={pos.y} r="5" fill="red" />
         </svg>
       </div>
