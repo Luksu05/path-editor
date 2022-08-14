@@ -8,7 +8,7 @@ import "./App.css";
 let obstacles = [];
 
 const App = () => {
-  const [mode, setMode] = useState(2); // 0 = add obstacles, 1 = add point A, 2 = add point B.
+  let [mode, setMode] = useState(0); // 0 = add obstacles, 1 = add point A, 2 = add point B.
   const [pointA, setPointA] = useState({ x: -20, y: 0 });
   const [pointB, setPointB] = useState({ x: -20, y: 0 });
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -69,9 +69,9 @@ const App = () => {
   return (
     <div className="maindiv">
       <header className="container">
-        <h1>Make obstacles</h1>
-        <h1>Add point A</h1>
-        <h1>Add point B</h1>
+        <button onClick={() => setMode(mode = 0)} ><h1>Make obstacles</h1></button>
+        <button onClick={() => setMode(mode = 1)} ><h1>Add point A</h1></button>
+        <button onClick={() => setMode(mode = 2)} ><h1>Add point B</h1></button>
       </header>
       <div className="innerdiv">
         <svg
