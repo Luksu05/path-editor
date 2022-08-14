@@ -8,7 +8,7 @@ import "./App.css";
 let obstacles = [];
 
 const App = () => {
-  let [mode, setMode] = useState(0); // 0 = add obstacles, 1 = add point A, 2 = add point B.
+  const [mode, setMode] = useState(0); // 0 = add obstacles, 1 = add point A, 2 = add point B.
   const [pointA, setPointA] = useState({ x: -20, y: 0 });
   const [pointB, setPointB] = useState({ x: -20, y: 0 });
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -65,13 +65,47 @@ const App = () => {
 
     setPosOffset({x: Math.round(top / 100) * 100, y: Math.round(left / 100) * 100});
   }
+
+  const distance = (p1, p2) => {
+    return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2)
+  }
+
+  const checkIntersection = (p1, p2, p3, p4) => {
+    const c2x = p3.x - p4.x;
+    const c3x = p1.x - p2.x;
+    const c2y = p3.y - p4.y;
+    const c3y = p1.y - p2.y;
+  
+    const d  = c3x * c2y - c3y * c2x;
+
+    if (d === 0)
+    {
+      console.log("Error")
+    }
+
+    const u1 = p1.x * p2.y - p1.y * p2.x;
+    const u4 = p3.x * p4.y - p3.y * p4.x;
+        
+    const px = (u1 * c2x - c3x * u4) / d;
+    const py = (u1 * c2y - c3y * u4) / d;
+    
+    const p = { x: px, y: py };
+    
+    if (distance(p1, p) + distance(p, p2) === distance(p1, p2)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+    
+  }
   
   return (
     <div className="maindiv">
       <header className="container">
-        <button onClick={() => setMode(mode = 0)} ><h1>Make obstacles</h1></button>
-        <button onClick={() => setMode(mode = 1)} ><h1>Add point A</h1></button>
-        <button onClick={() => setMode(mode = 2)} ><h1>Add point B</h1></button>
+        <button onClick={() => setMode(0)} ><h1>Make obstacles</h1></button>
+        <button onClick={() => setMode(1)} ><h1>Add point A</h1></button>
+        <button onClick={() => setMode(2)} ><h1>Add point B</h1></button>
       </header>
       <div className="innerdiv">
         <svg
