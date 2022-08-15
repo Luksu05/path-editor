@@ -8,6 +8,10 @@ import "./App.css";
 let obstacles = [];
 let lines = [];
 
+const distance = (p1, p2) => {
+  return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2)
+}
+
 const App = () => {
   const [mode, setMode] = useState(0); // 0 = add obstacles, 1 = add point A, 2 = add point B.
   const [pointA, setPointA] = useState({ x: 1, y: 1 });
@@ -15,6 +19,7 @@ const App = () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [posOffset, setPosOffset] = useState({ x: 0, y: 0 });
   const [obstacle, setObstacle] = useState([]);
+  const [path, setPath] = useState([]);
   const width = 50;
   const height = 50;
   const size = 100;
@@ -67,41 +72,49 @@ const App = () => {
     setPosOffset({x: Math.round(top / 100) * 100, y: Math.round(left / 100) * 100});
   }
 
-  const distance = (p1, p2) => {
-    return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2)
-  }
 
-  const checkIntersection = (p1, p2, p3, p4) => {
-    const c2x = p3.x - p4.x;
-    const c3x = p1.x - p2.x;
-    const c2y = p3.y - p4.y;
-    const c3y = p1.y - p2.y;
-  
-    const d  = c3x * c2y - c3y * c2x;
 
-    if (d === 0)
+  const checkIntersection = (p1, p2) => {
+    getLines();
+
+    for (let i = 0; i < lines.length; i++)
     {
-      console.log("Error intersection point is infinity")
+      const p3 = { x: lines[i].x1, y: lines[i].y1 };
+      const p4 = { x: lines[i].x2, y: lines[i].y2 };
+
+      const c2x = p3.x - p4.x;
+      const c3x = p1.x - p2.x;
+      const c2y = p3.y - p4.y;
+      const c3y = p1.y - p2.y;
+    
+      const d  = c3x * c2y - c3y * c2x;
+  
+      if (d === 0)
+      {
+        console.log("Error: intersection point is infinity")
+      }
+  
+      const u1 = p1.x * p2.y - p1.y * p2.x;
+      const u4 = p3.x * p4.y - p3.y * p4.x;
+      
+      const px = (u1 * c2x - c3x * u4) / d;
+      const py = (u1 * c2y - c3y * u4) / d;
+      
+      const p = { x: px, y: py };
+      if (distance(p1, p) + distance(p, p2) === distance(p1, p2)) {
+        console.log("Intersects");
+        return true;
+      }
+      else {
+        console.log("Does not intersect");
+        return false;
+      }
     }
 
-    const u1 = p1.x * p2.y - p1.y * p2.x;
-    const u4 = p3.x * p4.y - p3.y * p4.x;
-    
-    const px = (u1 * c2x - c3x * u4) / d;
-    const py = (u1 * c2y - c3y * u4) / d;
-    
-    const p = { x: px, y: py };
-    if (distance(p1, p) + distance(p, p2) === distance(p1, p2)) {
-      console.log("true");
-      return true;
-    }
-    else {
-      console.log("false");
-      return false;
-    }
   }
 
-  const getLines = (p1, p2) => {
+  const getLines = () => {
+    lines = [];
     for (let i = 0; i < obstacles.length; i++)
     {
       for (let j = 0; j < obstacles[i].length; j++) {
@@ -114,15 +127,14 @@ const App = () => {
       }
       console.log(lines);
     }
-    return true;
   }
 
   return (
     <div className="maindiv">
       <header className="container">
-        <button onClick={() => setMode(0)} ><h1>Make obstacles</h1></button>
-        <button onClick={() => setMode(1)} ><h1>Add point A</h1></button>
-        <button onClick={() => setMode(2)} ><h1>Add point B</h1></button>
+        <button onClick={() => setMode(0)}><h1>Make obstacles</h1></button>
+        <button onClick={() => setMode(1)}><h1>Add point A</h1></button>
+        <button onClick={() => setMode(2)}><h1>Add point B</h1></button>
       </header>
       <div className="innerdiv">
         <svg
