@@ -29,3 +29,8 @@ h1 {
 svg {
     outline: 3px black solid;
 }
+
+body {
+    margin: 0;
+  }
+  
