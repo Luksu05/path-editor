@@ -7,6 +7,7 @@ import "./styles.css";
 
 let obstacles = [];
 let lines = [];
+let paths = [];
 
 const distance = (p1, p2) => {
   return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
@@ -20,19 +21,17 @@ const App = () => {
   const [posOffset, setPosOffset] = useState({ x: 0, y: 0 });
   const [obstacle, setObstacle] = useState([]);
   const [path, setPath] = useState([]);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const width = 50;
   const height = 50;
   const size = 100;
 
   useEffect(() => {
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
+    window.addEventListener("resize", updateDimensions());
+    return () => window.removeEventListener("resize", updateDimensions());
   }, []);
 
   const updateDimensions = () => {
-    setWindowWidth(window.innerWidth);
     setWindowHeight(window.innerHeight);
   };
 
@@ -98,7 +97,7 @@ const App = () => {
       const d = c3x * c2y - c3y * c2x;
 
       if (d === 0) {
-        console.log("Error: intersection point is infinity");
+        console.log("Error: intersection point is infinity or zero.");
       }
 
       const u1 = p1.x * p2.y - p1.y * p2.x;
@@ -142,6 +141,22 @@ const App = () => {
     }
   };
 
+  const calculate = (pointA, pointB) => {
+    let isOn = true;
+    let currentPoint = pointA;
+    setPath([{ pointA }]);
+    getLines();
+
+    while (isOn) {
+      if (!checkIntersection(currentPoint, pointB)) {
+        setPath((oldPath) => [...oldPath, { pointB }]);
+        paths.push(path);
+        isOn = false;
+      }
+      isOn = false;
+    }
+  };
+
   return (
     <div className="maindiv">
       <header className="container">
@@ -153,6 +168,9 @@ const App = () => {
         </button>
         <button onClick={() => setMode(2)}>
           <h1>Add point B</h1>
+        </button>
+        <button onClick={() => calculate(pointA, pointB)}>
+          <h1>Calculate</h1>
         </button>
       </header>
       <div className="innerdiv">
