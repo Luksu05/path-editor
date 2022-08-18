@@ -3,6 +3,7 @@ import Grid from "./components/Grid";
 import Obstacles from "./components/Obstacles";
 import Obstacle from "./components/Obstacle";
 import Point from "./components/Point";
+import GetLines from "./components/GetLines";
 import Path from "./components/Path";
 import "./styles.css";
 
@@ -51,7 +52,8 @@ const App = () => {
       if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
         obstacles.push(obstacle);
         setObstacle([]);
-        getLines();
+        GetLines({ obstacles });
+
       } else {
         setObstacle([...obstacle, { x, y }]);
       }
@@ -116,30 +118,6 @@ const App = () => {
         console.log("Does not intersect");
         return false;
       }
-    }
-  };
-
-  const getLines = () => {
-    lines = [];
-    for (let i = 0; i < obstacles.length; i++) {
-      for (let j = 0; j < obstacles[i].length; j++) {
-        if (obstacles[i][j + 1]) {
-          lines.push({
-            x1: obstacles[i][j].x,
-            y1: obstacles[i][j].y,
-            x2: obstacles[i][j + 1].x,
-            y2: obstacles[i][j + 1].y,
-          });
-        } else {
-          lines.push({
-            x1: obstacles[i][j].x,
-            y1: obstacles[i][j].y,
-            x2: obstacles[i][0].x,
-            y2: obstacles[i][0].y,
-          });
-        }
-      }
-      console.log(lines);
     }
   };
 
