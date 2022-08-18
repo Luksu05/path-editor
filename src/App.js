@@ -3,6 +3,7 @@ import Grid from "./components/Grid";
 import Obstacles from "./components/Obstacles";
 import Obstacle from "./components/Obstacle";
 import Point from "./components/Point";
+import Path from "./components/Path";
 import "./styles.css";
 
 let obstacles = [];
@@ -21,6 +22,7 @@ const App = () => {
   const [posOffset, setPosOffset] = useState({ x: 0, y: 0 });
   const [obstacle, setObstacle] = useState([]);
   const [path, setPath] = useState([]);
+  const [bestPath, setBestPath] = useState([]);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const width = 50;
   const height = 50;
@@ -49,6 +51,7 @@ const App = () => {
       if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
         obstacles.push(obstacle);
         setObstacle([]);
+        getLines();
       } else {
         setObstacle([...obstacle, { x, y }]);
       }
@@ -83,7 +86,6 @@ const App = () => {
   };
 
   const checkIntersection = (p1, p2) => {
-    getLines();
 
     for (let i = 0; i < lines.length; i++) {
       const p3 = { x: lines[i].x1, y: lines[i].y1 };
@@ -109,7 +111,7 @@ const App = () => {
       const p = { x: px, y: py };
       if (distance(p1, p) + distance(p, p2) === distance(p1, p2)) {
         console.log("Intersects");
-        return true;
+        return { intersectingLine: lines[i] };
       } else {
         console.log("Does not intersect");
         return false;
@@ -144,12 +146,12 @@ const App = () => {
   const calculate = (pointA, pointB) => {
     let isOn = true;
     let currentPoint = pointA;
-    setPath([{ pointA }]);
-    getLines();
+    setPath([[pointA.x, pointA.y]]);
 
     while (isOn) {
       if (!checkIntersection(currentPoint, pointB)) {
-        setPath((oldPath) => [...oldPath, { pointB }]);
+        setPath((oldPath) => [...oldPath, [pointB.x, pointB.y]]);
+        setBestPath(path);
         paths.push(path);
         isOn = false;
       }
@@ -197,6 +199,7 @@ const App = () => {
             size={size}
             color="yellow"
           />
+          <Path bestPath={bestPath} />
           <circle cx={pos.x} cy={pos.y} r="5" fill="red" />
         </svg>
       </div>
