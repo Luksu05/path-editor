@@ -25,9 +25,8 @@ const App = () => {
   const [path, setPath] = useState([]);
   const [bestPath, setBestPath] = useState([]);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const width = 50;
-  const height = 50;
-  const size = 100;
+  const tileSize = 50;
+  const gridSize = 100;
 
   useEffect(() => {
     window.addEventListener("resize", updateDimensions());
@@ -41,28 +40,29 @@ const App = () => {
   const handleMouse = (event) => {
     getCoords();
     setPos({
-      x: Math.round(event.pageX / size) * size - posOffset.y,
-      y: Math.round(event.pageY / size) * size - posOffset.x,
+      x: Math.round(event.pageX / gridSize) * gridSize - posOffset.y,
+      y: Math.round(event.pageY / gridSize) * gridSize - posOffset.x,
     });
   };
 
   const handleClick = () => {
     if (mode === 0) {
-      const [x, y] = [pos.x / size, pos.y / size];
+      const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
         obstacles.push(obstacle);
         setObstacle([]);
         GetLines({ obstacles });
-
       } else {
         setObstacle([...obstacle, { x, y }]);
       }
     } else if (mode === 1) {
-      const [x, y] = [pos.x / size, pos.y / size];
+      const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       setPointA({ x, y });
+      setBestPath([]);
     } else if (mode === 2) {
-      const [x, y] = [pos.x / size, pos.y / size];
+      const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       setPointB({ x, y });
+      setBestPath([]);
     }
   };
 
@@ -88,7 +88,6 @@ const App = () => {
   };
 
   const checkIntersection = (p1, p2) => {
-
     for (let i = 0; i < lines.length; i++) {
       const p3 = { x: lines[i].x1, y: lines[i].y1 };
       const p4 = { x: lines[i].x2, y: lines[i].y2 };
@@ -162,19 +161,19 @@ const App = () => {
           onClick={handleClick}
         >
           <rect width="100%" height="100%" fill="gray" />
-          <Grid width={width} height={height} size={size} />
-          <Obstacles obstacles={obstacles} size={size} />
-          <Obstacle obstacle={obstacle} size={size} />
+          <Grid width={tileSize} height={tileSize} size={gridSize} />
+          <Obstacles obstacles={obstacles} size={gridSize} />
+          <Obstacle obstacle={obstacle} size={gridSize} />
           <Point
             pointX={pointA.x}
             pointY={pointA.y}
-            size={size}
+            size={gridSize}
             color="green"
           />
           <Point
             pointX={pointB.x}
             pointY={pointB.y}
-            size={size}
+            size={gridSize}
             color="yellow"
           />
           <Path bestPath={bestPath} />
