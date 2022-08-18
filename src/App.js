@@ -3,6 +3,7 @@ import Grid from "./components/Grid";
 import Obstacles from "./components/Obstacles";
 import Obstacle from "./components/Obstacle";
 import Point from "./components/Point";
+import GetLines from "./components/GetLines";
 import "./styles.css";
 
 let obstacles = [];
@@ -83,7 +84,7 @@ const App = () => {
   };
 
   const checkIntersection = (p1, p2) => {
-    getLines();
+    GetLines({ obstacles });
 
     for (let i = 0; i < lines.length; i++) {
       const p3 = { x: lines[i].x1, y: lines[i].y1 };
@@ -117,35 +118,11 @@ const App = () => {
     }
   };
 
-  const getLines = () => {
-    lines = [];
-    for (let i = 0; i < obstacles.length; i++) {
-      for (let j = 0; j < obstacles[i].length; j++) {
-        if (obstacles[i][j + 1]) {
-          lines.push({
-            x1: obstacles[i][j].x,
-            y1: obstacles[i][j].y,
-            x2: obstacles[i][j + 1].x,
-            y2: obstacles[i][j + 1].y,
-          });
-        } else {
-          lines.push({
-            x1: obstacles[i][j].x,
-            y1: obstacles[i][j].y,
-            x2: obstacles[i][0].x,
-            y2: obstacles[i][0].y,
-          });
-        }
-      }
-      console.log(lines);
-    }
-  };
-
   const calculate = (pointA, pointB) => {
     let isOn = true;
     let currentPoint = pointA;
     setPath([{ pointA }]);
-    getLines();
+    GetLines({ obstacles });
 
     while (isOn) {
       if (!checkIntersection(currentPoint, pointB)) {
