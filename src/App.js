@@ -29,13 +29,10 @@ const App = () => {
   const gridSize = 100;
 
   useEffect(() => {
-    window.addEventListener("resize", updateDimensions());
-    return () => window.removeEventListener("resize", updateDimensions());
+    window.addEventListener("resize", setWindowHeight(window.innerHeight));
+    return () =>
+      window.removeEventListener("resize", setWindowHeight(window.innerHeight));
   }, []);
-
-  const updateDimensions = () => {
-    setWindowHeight(window.innerHeight);
-  };
 
   const handleMouse = (event) => {
     getCoords();
