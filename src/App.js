@@ -38,8 +38,12 @@ const App = () => {
     const box = document.getElementsByTagName("svg")[0].getBoundingClientRect();
 
     setPos({
-      x: Math.round((event.clientX - box.left) / gridSize) * gridSize,
-      y: Math.round((event.clientY - box.top) / gridSize) * gridSize,
+      x:
+        Math.round((event.clientX - box.left) / gridSize / (492 / 800)) *
+        gridSize,
+      y:
+        Math.round((event.clientY - box.top) / gridSize / (492 / 800)) *
+        gridSize,
     });
   };
 
