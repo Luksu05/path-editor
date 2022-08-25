@@ -21,7 +21,6 @@ const App = () => {
   const [pointA, setPointA] = useState({ x: 1, y: 1 });
   const [pointB, setPointB] = useState({ x: 2, y: 2 });
   const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [posOffset, setPosOffset] = useState({ x: 0, y: 0 });
   const [obstacle, setObstacle] = useState([]);
   const [bestPath, setBestPath] = useState([]);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
