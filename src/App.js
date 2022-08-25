@@ -21,7 +21,6 @@ const App = () => {
   const [pointA, setPointA] = useState({ x: 1, y: 1 });
   const [pointB, setPointB] = useState({ x: 2, y: 2 });
   const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [posOffset, setPosOffset] = useState({ x: 0, y: 0 });
   const [obstacle, setObstacle] = useState([]);
   const [bestPath, setBestPath] = useState([]);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
@@ -35,10 +34,15 @@ const App = () => {
   }, []);
 
   const handleMouse = (event) => {
-    getCoords();
+    const box = document.getElementsByTagName("svg")[0].getBoundingClientRect();
+
     setPos({
-      x: Math.round(event.pageX / gridSize) * gridSize - posOffset.y,
-      y: Math.round(event.pageY / gridSize) * gridSize - posOffset.x,
+      x:
+        Math.round((event.clientX - box.left) / gridSize / (492 / 800)) *
+        gridSize,
+      y:
+        Math.round((event.clientY - box.top) / gridSize / (492 / 800)) *
+        gridSize,
     });
   };
 
@@ -60,27 +64,6 @@ const App = () => {
       const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       setPointB({ x, y });
     }
-  };
-
-  const getCoords = () => {
-    const box = document.getElementsByTagName("svg")[0].getBoundingClientRect();
-
-    const body = document.body;
-    const docEl = document.documentElement;
-
-    let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-    let scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
-
-    let clientTop = docEl.clientTop || body.clientTop || 0;
-    let clientLeft = docEl.clientLeft || body.clientLeft || 0;
-
-    let top = box.top + scrollTop - clientTop;
-    let left = box.left + scrollLeft - clientLeft;
-
-    setPosOffset({
-      x: Math.round(top / 100) * 100,
-      y: Math.round(left / 100) * 100,
-    });
   };
 
   const checkIntersection = (p1, p2) => {
