@@ -43,6 +43,7 @@ const App = () => {
   };
 
   const handleClick = () => {
+    setBestPath([]);
     if (mode === 0) {
       const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
@@ -55,11 +56,9 @@ const App = () => {
     } else if (mode === 1) {
       const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       setPointA({ x, y });
-      setBestPath([]);
     } else if (mode === 2) {
       const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       setPointB({ x, y });
-      setBestPath([]);
     }
   };
 
