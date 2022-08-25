@@ -9,6 +9,7 @@ import "./styles.css";
 
 let obstacles = [];
 let lines = [];
+let path = [];
 let paths = [];
 
 const distance = (p1, p2) => {
@@ -22,7 +23,6 @@ const App = () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [posOffset, setPosOffset] = useState({ x: 0, y: 0 });
   const [obstacle, setObstacle] = useState([]);
-  const [path, setPath] = useState([]);
   const [bestPath, setBestPath] = useState([]);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const tileSize = 50;
@@ -120,13 +120,14 @@ const App = () => {
   const calculate = (pointA, pointB) => {
     let isOn = true;
     let currentPoint = pointA;
-    setPath([[pointA.x, pointA.y]]);
+    path.push([pointA.x, pointA.y]);
 
     while (isOn) {
       if (!checkIntersection(currentPoint, pointB)) {
-        setPath((oldPath) => [...oldPath, [pointB.x, pointB.y]]);
+        path.push([pointB.x, pointB.y]);
         setBestPath(path);
         paths.push(path);
+        path = [];
         isOn = false;
       }
       isOn = false;
