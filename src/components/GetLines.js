@@ -20,7 +20,6 @@ const GetLines = ({ obstacles }) => {
         });
       }
     }
-    console.log(lines);
     return lines;
   }
 };

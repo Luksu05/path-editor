@@ -78,10 +78,6 @@ const App = () => {
 
       const d = c3x * c2y - c3y * c2x;
 
-      if (d === 0) {
-        console.log("Error: intersection point is infinity or zero.");
-      }
-
       const u1 = p1.x * p2.y - p1.y * p2.x;
       const u4 = p3.x * p4.y - p3.y * p4.x;
 
@@ -90,10 +86,8 @@ const App = () => {
 
       const p = { x: px, y: py };
       if (distance(p1, p) + distance(p, p2) === distance(p1, p2)) {
-        console.log("Intersects");
         return { intersectingLine: lines[i] };
       } else {
-        console.log("Does not intersect");
         return false;
       }
     }
