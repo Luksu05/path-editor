@@ -12,8 +12,14 @@ let lines = [];
 let path = [];
 let paths = [];
 
-const distance = (p1, p2) => {
+const dist = (p1, p2) => {
   return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
+};
+const sqr = (x) => {
+  return x * x;
+};
+const dist2 = (v, w) => {
+  return sqr(v.x - w.x) + sqr(v.y - w.y);
 };
 
 const App = () => {
@@ -67,7 +73,20 @@ const App = () => {
     }
   };
 
+  const distToSegmentSquared = (p, v, w) => {
+    let l2 = dist2(v, w);
+    if (l2 === 0) return dist2(p, v);
+    let t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
+    t = Math.max(0, Math.min(1, t));
+    return dist2(p, { x: v.x + t * (w.x - v.x), y: v.y + t * (w.y - v.y) });
+  };
+
+  const distToSegment = (p, v, w) => {
+    return Math.sqrt(distToSegmentSquared(p, v, w));
+  };
+
   const checkIntersection = (p1, p2) => {
+    let intersectingLines = [];
     for (let i = 0; i < lines.length; i++) {
       const p3 = { x: lines[i].x1, y: lines[i].y1 };
       const p4 = { x: lines[i].x2, y: lines[i].y2 };
@@ -86,10 +105,8 @@ const App = () => {
       const py = (u1 * c2y - c3y * u4) / d;
 
       const p = { x: px, y: py };
-      if (distance(p1, p) + distance(p, p2) === distance(p1, p2)) {
-        return { intersectingLine: lines[i] };
-      } else {
-        return false;
+      if (dist(p1, p) + dist(p, p2) === dist(p1, p2)) {
+        intersectingLines.push(lines[i]);
       }
     }
   };
@@ -97,17 +114,21 @@ const App = () => {
   const calculate = (pointA, pointB) => {
     let isOn = true;
     let currentPoint = pointA;
+    let intersectingLine = checkIntersection(currentPoint, pointB);
     path.push([pointA.x, pointA.y]);
 
     while (isOn) {
-      if (!checkIntersection(currentPoint, pointB)) {
+      if (!intersectingLine) {
         path.push([pointB.x, pointB.y]);
         setBestPath(path);
         paths.push(path);
         path = [];
         isOn = false;
+      } else {
+        console.log(intersectingLine);
+        intersectingLine = checkIntersection(currentPoint, pointB);
+        isOn = false;
       }
-      isOn = false;
     }
   };
 
