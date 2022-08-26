@@ -109,6 +109,29 @@ const App = () => {
         intersectingLines.push(lines[i]);
       }
     }
+    if (intersectingLines.length) {
+      let intersectingLine = intersectingLines[0];
+      for (let i = 0; i < intersectingLines.length; i++) {
+        if (
+          distToSegment(
+            { x: p1.x, y: p1.y },
+            { x: intersectingLines[i].x1, y: intersectingLines[i].y1 },
+            { x: intersectingLines[i].x2, y: intersectingLines[i].y2 }
+          ) >
+          distToSegment(
+            { x: p1.x, y: p1.y },
+            { x: intersectingLine.x1, y: intersectingLine.y1 },
+            { x: intersectingLine.x2, y: intersectingLine.y2 }
+          )
+        ) {
+          let intersectingLine = intersectingLines[i];
+          console.log(intersectingLine);
+        }
+      }
+      return intersectingLine;
+    } else {
+      return false;
+    }
   };
 
   const calculate = (pointA, pointB) => {
@@ -125,7 +148,6 @@ const App = () => {
         path = [];
         isOn = false;
       } else {
-        console.log(intersectingLine);
         intersectingLine = checkIntersection(currentPoint, pointB);
         isOn = false;
       }
