@@ -53,7 +53,7 @@ const App = () => {
       if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
         obstacles.push(obstacle);
         setObstacle([]);
-        GetLines({ obstacles });
+        lines = GetLines({ obstacles });
       } else {
         setObstacle([...obstacle, { x, y }]);
       }
