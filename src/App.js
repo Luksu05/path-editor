@@ -48,6 +48,7 @@ const App = () => {
 
   const handleClick = () => {
     setBestPath([]);
+    path = [];
     if (mode === 0) {
       const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
