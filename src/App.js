@@ -41,13 +41,13 @@ const App = () => {
 
   const handleMouse = (event) => {
     const box = document.getElementsByTagName("svg")[0].getBoundingClientRect();
-
+    
     setPos({
       x:
-        Math.round((event.clientX - box.left) / gridSize / (492 / 800)) *
+        Math.round((event.clientX - box.left) / gridSize / (box.width / 800)) *
         gridSize,
       y:
-        Math.round((event.clientY - box.top) / gridSize / (492 / 800)) *
+        Math.round((event.clientY - box.top) / gridSize / (box.height / 800)) *
         gridSize,
     });
   };
