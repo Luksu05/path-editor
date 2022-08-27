@@ -20,8 +20,8 @@ const GetLines = ({ obstacles }) => {
         });
       }
     }
-    return lines;
   }
+  return lines;
 };
 
 export default GetLines;
