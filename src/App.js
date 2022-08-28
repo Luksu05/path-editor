@@ -178,7 +178,7 @@ const App = () => {
           onMouseMove={handleMouse}
           onClick={handleClick}
         >
-          <rect width="100%" height="100%" fill="gray" />
+          <rect width="100%" height="100%" fill="none" />
           <Grid width={tileSize} height={tileSize} size={gridSize} />
           <Obstacles obstacles={obstacles} size={gridSize} />
           <Obstacle obstacle={obstacle} size={gridSize} />
