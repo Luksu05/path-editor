@@ -106,12 +106,19 @@ const App = () => {
       const py = (u1 * c2y - c3y * u4) / d;
 
       const p = { x: px, y: py };
-      console.log(dist(p3, p) + dist(p, p4));
-      console.log(dist(p3, p4));
+      console.log(Math.floor((dist(p3, p) + dist(p, p4)) * 10000) / 10000);
+      console.log(Math.floor(dist(p3, p4) * 10000) / 10000);
       console.log(lines.length);
+      if (
+        Math.floor((dist(p3, p) + dist(p, p4)) * 10000) / 10000 ===
+        Math.floor(dist(p3, p4) * 10000) / 10000
+      ) {
+        intersectingLines.push(lines[i]);
+      }
     }
     console.log(intersectingLines);
     if (intersectingLines.length) {
+      console.log(intersectingLines.length);
       let intersectingLine = intersectingLines[0];
       for (let i = 0; i < intersectingLines.length; i++) {
         if (
