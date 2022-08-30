@@ -1,37 +1,44 @@
 .maindiv {
-    background-color: #020b2b;
-    height: 100vh;
-    margin: 0;
+  background-color: #020b2b;
+  height: 100vh;
+  margin: 0;
 }
 
 .innerdiv {
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 header {
-    background-color: #0d0340;
-    height: 10vh;
+  background-color: #0d0340;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+button {
+  height: 8vh;
+  display: flex;
+  align-items: center;
 }
 
 h1 {
-    margin: 0;
-    display: flex;
-    justify-content: center;
+  margin: 0;
+  display: flex;
+  justify-content: center;
 }
 
 svg {
-    outline: 3px black solid;
+  outline: 3px black solid;
 }
 
 body {
-    margin: 0;
-  }
-  
+  margin: 0;
+}

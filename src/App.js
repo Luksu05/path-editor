@@ -41,7 +41,7 @@ const App = () => {
 
   const handleMouse = (event) => {
     const box = document.getElementsByTagName("svg")[0].getBoundingClientRect();
-    
+
     setPos({
       x:
         Math.round((event.clientX - box.left) / gridSize / (box.width / 800)) *
@@ -86,6 +86,7 @@ const App = () => {
   };
 
   const checkIntersection = (p1, p2) => {
+    lines = GetLines({ obstacles });
     let intersectingLines = [];
     for (let i = 0; i < lines.length; i++) {
       const p3 = { x: lines[i].x1, y: lines[i].y1 };
@@ -105,10 +106,11 @@ const App = () => {
       const py = (u1 * c2y - c3y * u4) / d;
 
       const p = { x: px, y: py };
-      if (dist(p1, p) + dist(p, p2) === dist(p1, p2)) {
-        intersectingLines.push(lines[i]);
-      }
+      console.log(dist(p3, p) + dist(p, p4));
+      console.log(dist(p3, p4));
+      console.log(lines.length);
     }
+    console.log(intersectingLines);
     if (intersectingLines.length) {
       let intersectingLine = intersectingLines[0];
       for (let i = 0; i < intersectingLines.length; i++) {
@@ -158,16 +160,16 @@ const App = () => {
     <div className="maindiv">
       <header className="container">
         <button onClick={() => setMode(0)}>
-          <h1>Make obstacles</h1>
+          <h2>Make obstacles</h2>
         </button>
         <button onClick={() => setMode(1)}>
-          <h1>Add point A</h1>
+          <h2>Add point A</h2>
         </button>
         <button onClick={() => setMode(2)}>
-          <h1>Add point B</h1>
+          <h2>Add point B</h2>
         </button>
         <button onClick={() => calculate(pointA, pointB)}>
-          <h1>Calculate</h1>
+          <h2>Calculate</h2>
         </button>
       </header>
       <div className="innerdiv">
@@ -178,7 +180,7 @@ const App = () => {
           onMouseMove={handleMouse}
           onClick={handleClick}
         >
-          <rect width="100%" height="100%" fill="none" />
+          <rect width="100%" height="100%" fill="gray" />
           <Grid width={tileSize} height={tileSize} size={gridSize} />
           <Obstacles obstacles={obstacles} size={gridSize} />
           <Obstacle obstacle={obstacle} size={gridSize} />
