@@ -25,6 +25,7 @@ header {
 
 button {
   height: 8vh;
+  background-color: #0000ff;
   display: flex;
   align-items: center;
 }
