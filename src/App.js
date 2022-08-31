@@ -85,7 +85,7 @@ const App = () => {
     return Math.sqrt(distToSegmentSquared(p, v, w));
   };
 
-  const checkIntersection = (p1, p2) => {
+  const checkIntersection = (currentPoint, p2) => {
     lines = GetLines({ obstacles });
     let intersectingLines = [];
     for (let i = 0; i < lines.length; i++) {
@@ -93,13 +93,13 @@ const App = () => {
       const p4 = { x: lines[i].x2, y: lines[i].y2 };
 
       const c2x = p3.x - p4.x;
-      const c3x = p1.x - p2.x;
+      const c3x = currentPoint.x - p2.x;
       const c2y = p3.y - p4.y;
-      const c3y = p1.y - p2.y;
+      const c3y = currentPoint.y - p2.y;
 
       const d = c3x * c2y - c3y * c2x;
 
-      const u1 = p1.x * p2.y - p1.y * p2.x;
+      const u1 = currentPoint.x * p2.y - currentPoint.y * p2.x;
       const u4 = p3.x * p4.y - p3.y * p4.x;
 
       const px = (u1 * c2x - c3x * u4) / d;
@@ -118,24 +118,25 @@ const App = () => {
     }
     console.log(intersectingLines);
     if (intersectingLines.length) {
+      console.log(intersectingLines.length);
       let intersectingLine = intersectingLines[0];
       for (let i = 0; i < intersectingLines.length; i++) {
         if (
           distToSegment(
-            { x: p1.x, y: p1.y },
+            { x: currentPoint.x, y: currentPoint.y },
             { x: intersectingLines[i].x1, y: intersectingLines[i].y1 },
             { x: intersectingLines[i].x2, y: intersectingLines[i].y2 }
           ) >
           distToSegment(
-            { x: p1.x, y: p1.y },
+            { x: currentPoint.x, y: currentPoint.y },
             { x: intersectingLine.x1, y: intersectingLine.y1 },
             { x: intersectingLine.x2, y: intersectingLine.y2 }
           )
         ) {
-          console.log(p1);
+          console.log(currentPoint);
           console.log(
             distToSegment(
-              { x: p1.x, y: p1.y },
+              { x: currentPoint.x, y: currentPoint.y },
               { x: intersectingLines[i].x1, y: intersectingLines[i].y1 },
               { x: intersectingLines[i].x2, y: intersectingLines[i].y2 }
             )
