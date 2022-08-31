@@ -118,7 +118,6 @@ const App = () => {
     }
     console.log(intersectingLines);
     if (intersectingLines.length) {
-      console.log(intersectingLines.length);
       let intersectingLine = intersectingLines[0];
       for (let i = 0; i < intersectingLines.length; i++) {
         if (
@@ -133,10 +132,19 @@ const App = () => {
             { x: intersectingLine.x2, y: intersectingLine.y2 }
           )
         ) {
+          console.log(p1);
+          console.log(
+            distToSegment(
+              { x: p1.x, y: p1.y },
+              { x: intersectingLines[i].x1, y: intersectingLines[i].y1 },
+              { x: intersectingLines[i].x2, y: intersectingLines[i].y2 }
+            )
+          );
           let intersectingLine = intersectingLines[i];
           console.log(intersectingLine);
         }
       }
+      console.log(intersectingLine);
       return intersectingLine;
     } else {
       return false;
