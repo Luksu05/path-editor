@@ -16,6 +16,14 @@
   justify-content: space-around;
 }
 
+.yellow {
+  color: yellow;
+}
+
+.green {
+  color: darkgreen;
+}
+
 header {
   background-color: #020b2b;
   height: 10vh;

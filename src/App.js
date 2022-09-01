@@ -179,10 +179,10 @@ const App = () => {
           <h2>Make obstacles</h2>
         </button>
         <button onClick={() => setMode(1)}>
-          <h2>Add point A</h2>
+          <h2 className="green" >Add point A</h2>
         </button>
         <button onClick={() => setMode(2)}>
-          <h2>Add point B</h2>
+          <h2 className="yellow" >Add point B</h2>
         </button>
         <button onClick={() => calculate(pointA, pointB)}>
           <h2>Calculate</h2>
