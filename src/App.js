@@ -15,12 +15,6 @@ let paths = [];
 const dist = (p1, p2) => {
   return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
 };
-const sqr = (x) => {
-  return x * x;
-};
-const dist2 = (v, w) => {
-  return sqr(v.x - w.x) + sqr(v.y - w.y);
-};
 
 const App = () => {
   const [mode, setMode] = useState(0); // 0 = add obstacles, 1 = add point A, 2 = add point B.
@@ -73,18 +67,6 @@ const App = () => {
     }
   };
 
-  const distToSegmentSquared = (p, v, w) => {
-    let l2 = dist2(v, w);
-    if (l2 === 0) return dist2(p, v);
-    let t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
-    t = Math.max(0, Math.min(1, t));
-    return dist2(p, { x: v.x + t * (w.x - v.x), y: v.y + t * (w.y - v.y) });
-  };
-
-  const distToSegment = (p, v, w) => {
-    return Math.sqrt(distToSegmentSquared(p, v, w));
-  };
-
   const checkIntersection = (currentPoint, p2) => {
     lines = GetLines({ obstacles });
     let intersectingLines = [];
@@ -115,40 +97,6 @@ const App = () => {
       ) {
         intersectingLines.push(lines[i]);
       }
-    }
-    console.log(intersectingLines);
-    if (intersectingLines.length) {
-      console.log(intersectingLines.length);
-      let intersectingLine = intersectingLines[0];
-      for (let i = 0; i < intersectingLines.length; i++) {
-        if (
-          distToSegment(
-            { x: currentPoint.x, y: currentPoint.y },
-            { x: intersectingLines[i].x1, y: intersectingLines[i].y1 },
-            { x: intersectingLines[i].x2, y: intersectingLines[i].y2 }
-          ) >
-          distToSegment(
-            { x: currentPoint.x, y: currentPoint.y },
-            { x: intersectingLine.x1, y: intersectingLine.y1 },
-            { x: intersectingLine.x2, y: intersectingLine.y2 }
-          )
-        ) {
-          console.log(currentPoint);
-          console.log(
-            distToSegment(
-              { x: currentPoint.x, y: currentPoint.y },
-              { x: intersectingLines[i].x1, y: intersectingLines[i].y1 },
-              { x: intersectingLines[i].x2, y: intersectingLines[i].y2 }
-            )
-          );
-          let intersectingLine = intersectingLines[i];
-          console.log(intersectingLine);
-        }
-      }
-      console.log(intersectingLine);
-      return intersectingLine;
-    } else {
-      return false;
     }
   };
 
