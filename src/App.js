@@ -95,6 +95,8 @@ const App = () => {
         intersectingLines.push(lines[i]);
       }
     }
+    if (intersectingLines) return true;
+    else return false;
   };
 
   const calculate = (pointA, pointB) => {
