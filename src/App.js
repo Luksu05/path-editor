@@ -88,9 +88,6 @@ const App = () => {
       const py = (u1 * c2y - c3y * u4) / d;
 
       const p = { x: px, y: py };
-      console.log(Math.floor((dist(p3, p) + dist(p, p4)) * 10000) / 10000);
-      console.log(Math.floor(dist(p3, p4) * 10000) / 10000);
-      console.log(lines.length);
       if (
         Math.floor((dist(p3, p) + dist(p, p4)) * 10000) / 10000 ===
         Math.floor(dist(p3, p4) * 10000) / 10000
@@ -103,18 +100,16 @@ const App = () => {
   const calculate = (pointA, pointB) => {
     let isOn = true;
     let currentPoint = pointA;
-    let intersectingLine = checkIntersection(currentPoint, pointB);
     path.push([pointA.x, pointA.y]);
 
     while (isOn) {
-      if (!intersectingLine) {
+      if (!checkIntersection(currentPoint, pointB)) {
         path.push([pointB.x, pointB.y]);
         setBestPath(path);
         paths.push(path);
         path = [];
         isOn = false;
       } else {
-        intersectingLine = checkIntersection(currentPoint, pointB);
         isOn = false;
       }
     }
