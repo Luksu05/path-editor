@@ -70,7 +70,7 @@ const App = () => {
     path.push([pointA.x, pointA.y]);
 
     while (isOn) {
-      if (CheckIntersection(currentPoint, pointB, lines) === true) {
+      if (CheckIntersection(currentPoint, pointB, lines) === false) {
         path.push([pointB.x, pointB.y]);
         setBestPath(path);
         paths.push(path);
