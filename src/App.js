@@ -99,16 +99,6 @@ const App = () => {
         <button onClick={() => calculate(pointA, pointB)}>
           <h2>Calculate</h2>
         </button>
-        <button onClick={() => Algorithm(graph, "a", "f")}>
-          <h2>Algorithm</h2>
-        </button>
-        <button
-          onClick={() =>
-            console.log(GetPoints({ obstacles }, { pointA }, { pointB }))
-          }
-        >
-          <h2>Points</h2>
-        </button>
       </header>
       <div className="innerdiv">
         <svg
