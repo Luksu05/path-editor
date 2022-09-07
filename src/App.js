@@ -5,13 +5,13 @@ import Obstacle from "./components/Obstacle";
 import Point from "./components/Point";
 import GetLines from "./components/GetLines";
 import Path from "./components/Path";
-import CheckIntersection from "./components/CheckIntersection";
+import GetPoints from "./components/GetPoints";
+import GetGraph from "./components/GetGraph";
+import Algorithm from "./components/Algorithm";
 import "./styles.css";
 
 let obstacles = [];
 let lines = [];
-let path = [];
-let paths = [];
 
 const App = () => {
   const [mode, setMode] = useState(0); // 0 = add obstacles, 1 = add point A, 2 = add point B.
@@ -45,7 +45,6 @@ const App = () => {
 
   const handleClick = () => {
     setBestPath([]);
-    path = [];
     if (mode === 0) {
       const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
@@ -65,21 +64,16 @@ const App = () => {
   };
 
   const calculate = (pointA, pointB) => {
-    let isOn = true;
-    let currentPoint = pointA;
-    path.push([pointA.x, pointA.y]);
-
-    while (isOn) {
-      if (CheckIntersection(currentPoint, pointB, lines) === false) {
-        path.push([pointB.x, pointB.y]);
-        setBestPath(path);
-        paths.push(path);
-        path = [];
-        isOn = false;
-      } else {
-        isOn = false;
-      }
+    let points = GetPoints({ obstacles }, { pointA }, { pointB });
+    let graph = GetGraph(points, lines);
+    console.log(graph);
+    let last = Object.keys(graph)[Object.keys(graph).length - 1];
+    let path = Algorithm(graph, "a", last.toString());
+    let bestPathFormat = [];
+    for (let i = 0; i < path.length; i++) {
+      bestPathFormat.push([points[path[i]].x, points[path[i]].y]);
     }
+    setBestPath(bestPathFormat);
   };
 
   return (
