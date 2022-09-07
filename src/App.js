@@ -14,7 +14,7 @@ let obstacles = [];
 let lines = [];
 
 const App = () => {
-  const [mode, setMode] = useState(0); // 0 = add obstacles, 1 = add point A, 2 = add point B.
+  const [mode, setMode] = useState("Obstacle");
   const [pointA, setPointA] = useState({ x: 1, y: 1 });
   const [pointB, setPointB] = useState({ x: 2, y: 2 });
   const [pos, setPos] = useState({ x: -10, y: -10 });
@@ -45,7 +45,7 @@ const App = () => {
 
   const handleClick = () => {
     setBestPath([]);
-    if (mode === 0) {
+    if (mode === "Obstacle") {
       const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
         obstacles.push(obstacle);
@@ -54,10 +54,10 @@ const App = () => {
       } else {
         setObstacle([...obstacle, { x, y }]);
       }
-    } else if (mode === 1) {
+    } else if (mode === "Point A") {
       const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       setPointA({ x, y });
-    } else if (mode === 2) {
+    } else if (mode === "Point B") {
       const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       setPointB({ x, y });
     }
@@ -66,7 +66,6 @@ const App = () => {
   const calculate = (pointA, pointB) => {
     let points = GetPoints({ obstacles }, { pointA }, { pointB });
     let graph = GetGraph(points, lines);
-    console.log(graph);
     let last = Object.keys(graph)[Object.keys(graph).length - 1];
     let path = Algorithm(graph, "a", last.toString());
     let bestPathFormat = [];
@@ -79,13 +78,13 @@ const App = () => {
   return (
     <div className="maindiv">
       <header className="container">
-        <button onClick={() => setMode(0)}>
+        <button onClick={() => setMode("Obstacle")}>
           <h2>Make obstacles</h2>
         </button>
-        <button onClick={() => setMode(1)}>
+        <button onClick={() => setMode("Point A")}>
           <h2 className="green">Add point A</h2>
         </button>
-        <button onClick={() => setMode(2)}>
+        <button onClick={() => setMode("Point B")}>
           <h2 className="yellow">Add point B</h2>
         </button>
         <button onClick={() => calculate(pointA, pointB)}>
