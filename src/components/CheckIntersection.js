@@ -15,7 +15,6 @@ const CheckIntersection = (p1, p2, lines) => {
     ) {
       continue;
     }
-    console.log("asd");
 
     const c2x = p3.x - p4.x;
     const c3x = p1.x - p2.x;
