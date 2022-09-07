@@ -5,7 +5,7 @@ const Obstacle = ({ obstacle, size, color = "pink" }) => (
     points={obstacle.map((pos) => `${pos.x * size},${pos.y * size}`).join(" ")}
     fill={color}
     stroke="black"
-    stroke-width="4px"
+    strokeWidth="4px"
   />
 );
 
