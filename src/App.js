@@ -5,13 +5,25 @@ import Obstacle from "./components/Obstacle";
 import Point from "./components/Point";
 import GetLines from "./components/GetLines";
 import Path from "./components/Path";
-import CheckIntersection from "./components/CheckIntersection";
+import GetPoints from "./components/GetPoints";
+import GetGraph from "./components/GetGraph";
+import Algorithm from "./components/Algorithm";
 import "./styles.css";
 
 let obstacles = [];
-let lines = [];
+/* eslint-disable no-unused-vars */
 let path = [];
-let paths = [];
+let lines = [];
+/* eslint-enable no-unused-vars */
+
+const graph = {
+  a: { b: 5, c: 2 },
+  b: { a: 5, c: 7, d: 8 },
+  c: { a: 2, b: 7, d: 4, e: 8 },
+  d: { b: 8, c: 4, e: 6, f: 4 },
+  e: { c: 8, d: 6, f: 3 },
+  f: { e: 3, d: 4 },
+};
 
 const App = () => {
   const [mode, setMode] = useState(0); // 0 = add obstacles, 1 = add point A, 2 = add point B.
@@ -65,21 +77,11 @@ const App = () => {
   };
 
   const calculate = (pointA, pointB) => {
-    let isOn = true;
-    let currentPoint = pointA;
-    path.push([pointA.x, pointA.y]);
-
-    while (isOn) {
-      if (CheckIntersection(currentPoint, pointB, lines) === false) {
-        path.push([pointB.x, pointB.y]);
-        setBestPath(path);
-        paths.push(path);
-        path = [];
-        isOn = false;
-      } else {
-        isOn = false;
-      }
-    }
+    let points = GetPoints({ obstacles }, { pointA }, { pointB });
+    let graph2 = GetGraph(points, lines);
+    console.log(graph2);
+    let last = Object.keys(graph)[Object.keys(graph).length - 1];
+    Algorithm(graph, "a", last.toString());
   };
 
   return (
@@ -96,6 +98,16 @@ const App = () => {
         </button>
         <button onClick={() => calculate(pointA, pointB)}>
           <h2>Calculate</h2>
+        </button>
+        <button onClick={() => Algorithm(graph, "a", "f")}>
+          <h2>Algorithm</h2>
+        </button>
+        <button
+          onClick={() =>
+            console.log(GetPoints({ obstacles }, { pointA }, { pointB }))
+          }
+        >
+          <h2>Points</h2>
         </button>
       </header>
       <div className="innerdiv">
