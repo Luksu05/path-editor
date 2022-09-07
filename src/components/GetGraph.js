@@ -5,7 +5,6 @@ const dist = (p1, p2) => {
 };
 
 const GetGraph = (points, lines) => {
-  console.log(points);
   let graph = {};
   let tmp = {};
   let intersecting = [];
@@ -18,18 +17,16 @@ const GetGraph = (points, lines) => {
         intersecting.push(chrj);
       }
     }
-    console.log(chri);
     for (let i = 0; i < intersecting.length; i++) {
       if (intersecting[i] !== chri) {
         let weight = dist(points[intersecting[i]], points[chri]);
         tmp[intersecting[i]] = weight;
       }
     }
-    console.log(tmp);
+    graph[chri] = tmp;
     tmp = {};
     intersecting = [];
   }
-
   return graph;
 };
 

@@ -11,19 +11,7 @@ import Algorithm from "./components/Algorithm";
 import "./styles.css";
 
 let obstacles = [];
-/* eslint-disable no-unused-vars */
-let path = [];
 let lines = [];
-/* eslint-enable no-unused-vars */
-
-const graph = {
-  a: { b: 5, c: 2 },
-  b: { a: 5, c: 7, d: 8 },
-  c: { a: 2, b: 7, d: 4, e: 8 },
-  d: { b: 8, c: 4, e: 6, f: 4 },
-  e: { c: 8, d: 6, f: 3 },
-  f: { e: 3, d: 4 },
-};
 
 const App = () => {
   const [mode, setMode] = useState(0); // 0 = add obstacles, 1 = add point A, 2 = add point B.
@@ -57,7 +45,6 @@ const App = () => {
 
   const handleClick = () => {
     setBestPath([]);
-    path = [];
     if (mode === 0) {
       const [x, y] = [pos.x / gridSize, pos.y / gridSize];
       if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
@@ -78,10 +65,15 @@ const App = () => {
 
   const calculate = (pointA, pointB) => {
     let points = GetPoints({ obstacles }, { pointA }, { pointB });
-    let graph2 = GetGraph(points, lines);
-    console.log(graph2);
+    let graph = GetGraph(points, lines);
+    console.log(graph);
     let last = Object.keys(graph)[Object.keys(graph).length - 1];
-    Algorithm(graph, "a", last.toString());
+    let path = Algorithm(graph, "a", last.toString());
+    let bestPathFormat = [];
+    for (let i = 0; i < path.length; i++) {
+      bestPathFormat.push([points[path[i]].x, points[path[i]].y]);
+    }
+    setBestPath(bestPathFormat);
   };
 
   return (

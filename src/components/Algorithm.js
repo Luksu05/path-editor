@@ -31,10 +31,8 @@ const Algorithm = (graph, start, end) => {
 
   var vertex;
   while ((vertex = unvisited.shift())) {
-    // Explore unvisited neighbors
     var neighbors = map[vertex].filter((n) => !visited.includes(n.vertex));
 
-    // Add neighbors to the unvisited list
     unvisited.push(...neighbors.map((n) => n.vertex));
 
     var costToVertex = shortestDistances[vertex].cost;
@@ -47,14 +45,13 @@ const Algorithm = (graph, start, end) => {
         currCostToNeighbor === undefined ||
         newCostToNeighbor < currCostToNeighbor
       ) {
-        // Update the table
         shortestDistances[to] = { vertex, cost: newCostToNeighbor };
       }
     }
 
     visited.push(vertex);
   }
-  console.log(tracePath(shortestDistances, start, end));
+  return tracePath(shortestDistances, start, end);
 };
 
 export default Algorithm;

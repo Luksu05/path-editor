@@ -7,6 +7,16 @@ const CheckIntersection = (p1, p2, lines) => {
     const p3 = { x: lines[i].x1, y: lines[i].y1 };
     const p4 = { x: lines[i].x2, y: lines[i].y2 };
 
+    if (
+      (p1.x === p3.x && p1.y === p3.y) ||
+      (p1.x === p4.x && p1.y === p4.y) ||
+      (p2.x === p3.x && p2.y === p3.y) ||
+      (p2.x === p4.x && p2.y === p4.y)
+    ) {
+      continue;
+    }
+    console.log("asd");
+
     const c2x = p3.x - p4.x;
     const c3x = p1.x - p2.x;
     const c2y = p3.y - p4.y;
