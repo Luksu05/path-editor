@@ -67,7 +67,7 @@ const App = () => {
     let points = GetPoints({ obstacles }, { pointA }, { pointB });
     let graph = GetGraph(points, lines);
     let last = Object.keys(graph)[Object.keys(graph).length - 1];
-    let path = Algorithm(graph, "a", last.toString());
+    let path = Algorithm(graph, "aa", last.toString());
     let bestPathFormat = [];
     for (let i = 0; i < path.length; i++) {
       bestPathFormat.push([points[path[i]].x, points[path[i]].y]);
