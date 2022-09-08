@@ -95,10 +95,12 @@ const App = () => {
             <h3>Make Obstacles</h3>
           </ToggleButton>
           <ToggleButton value="Point A">
-            <h3>Add point A</h3>
+            <h3>Add point</h3>
+            <h3 className="AColor">A</h3>
           </ToggleButton>
           <ToggleButton value="Point B">
-            <h3>Add point B</h3>
+            <h3>Add point</h3>
+            <h3 className="BColor">B</h3>
           </ToggleButton>
           <ToggleButton value="Calculate">
             <h3>Calculate</h3>
@@ -121,13 +123,13 @@ const App = () => {
             pointX={pointA.x}
             pointY={pointA.y}
             size={gridSize}
-            color="green"
+            color="#87ace0"
           />
           <Point
             pointX={pointB.x}
             pointY={pointB.y}
             size={gridSize}
-            color="yellow"
+            color="#9187e0"
           />
           <Path bestPath={bestPath} />
           <circle cx={pos.x} cy={pos.y} r="5" fill="red" />

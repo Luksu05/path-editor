@@ -12,8 +12,8 @@ const Grid = ({ width, height, size }) => {
             y={y * size}
             width={size}
             height={size}
-            fill="#063553"
-            stroke="white"
+            fill="#3B429F"
+            stroke="#FFCAAF"
           />
         ))
       )}

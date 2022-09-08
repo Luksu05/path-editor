@@ -1,5 +1,4 @@
 .maindiv {
-  background-color: #f4a5ae;
   height: 100vh;
   margin: 0;
 }
@@ -16,29 +15,32 @@
   justify-content: space-around;
 }
 
-.yellow {
-  color: yellow;
+.AColor {
+  color: #87ace0;
+  margin-left: 3px;
 }
 
-.green {
-  color: green;
+.BColor {
+  color: #9187e0;
+  margin-left: 3px;
 }
 
 header {
-  background-color: #f4a5ae;
   height: 10vh;
   display: flex;
   align-items: center;
 }
 
 h3 {
-  color: #f5d7e3;
+  color: #6290c8;
 }
 
 svg {
-  outline: 3px black solid;
+  outline: 3px #9d96b8 solid;
+  outline-offset: -3px;
 }
 
 body {
+  background-color: #6260b5;
   margin: 0;
 }
