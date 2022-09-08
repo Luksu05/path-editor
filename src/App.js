@@ -78,8 +78,10 @@ const App = () => {
   };
 
   const handleMode = (event, newMode) => {
-    if (newMode === "Calculate") calculate(pointA, pointB);
-    else setMode(newMode);
+    if (newMode !== null) {
+      if (newMode === "Calculate") calculate(pointA, pointB);
+      else setMode(newMode);
+    }
   };
 
   return (
