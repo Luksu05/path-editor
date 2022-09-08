@@ -9,12 +9,14 @@ import GetPoints from "./components/GetPoints";
 import GetGraph from "./components/GetGraph";
 import Algorithm from "./components/Algorithm";
 import "./styles.css";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 let obstacles = [];
 let lines = [];
 
 const App = () => {
-  const [mode, setMode] = useState("Obstacle");
+  const [mode, setMode] = React.useState("Obstacle");
   const [pointA, setPointA] = useState({ x: 1, y: 1 });
   const [pointB, setPointB] = useState({ x: 2, y: 2 });
   const [pos, setPos] = useState({ x: -10, y: -10 });
@@ -75,21 +77,28 @@ const App = () => {
     setBestPath(bestPathFormat);
   };
 
+  const handleMode = (event, newMode) => {
+    if (newMode === "Calculate") calculate(pointA, pointB);
+    else setMode(newMode);
+  };
+
   return (
     <div className="maindiv">
       <header className="container">
-        <button onClick={() => setMode("Obstacle")}>
-          <h2>Make obstacles</h2>
-        </button>
-        <button onClick={() => setMode("Point A")}>
-          <h2 className="green">Add point A</h2>
-        </button>
-        <button onClick={() => setMode("Point B")}>
-          <h2 className="yellow">Add point B</h2>
-        </button>
-        <button onClick={() => calculate(pointA, pointB)}>
-          <h2>Calculate</h2>
-        </button>
+        <ToggleButtonGroup value={mode} exclusive onChange={handleMode}>
+          <ToggleButton value="Obstacle">
+            <h3>Make Obstacles</h3>
+          </ToggleButton>
+          <ToggleButton value="Point A">
+            <h3>Add point A</h3>
+          </ToggleButton>
+          <ToggleButton value="Point B">
+            <h3>Add point B</h3>
+          </ToggleButton>
+          <ToggleButton value="Calculate">
+            <h3>Calculate</h3>
+          </ToggleButton>
+        </ToggleButtonGroup>
       </header>
       <div className="innerdiv">
         <svg
