@@ -88,21 +88,22 @@ const App = () => {
         <ToggleButtonGroup
           value={mode}
           exclusive
+          className="buttons"
           onChange={handleMode}
           aria-label="toggle mode"
         >
-          <ToggleButton value="Obstacle">
+          <ToggleButton className="button" value="Obstacle">
             <h3>Make Obstacles</h3>
           </ToggleButton>
-          <ToggleButton value="Point A">
+          <ToggleButton className="button" value="Point A">
             <h3>Add point</h3>
             <h3 className="AColor">A</h3>
           </ToggleButton>
-          <ToggleButton value="Point B">
+          <ToggleButton className="button" value="Point B">
             <h3>Add point</h3>
             <h3 className="BColor">B</h3>
           </ToggleButton>
-          <ToggleButton value="Calculate">
+          <ToggleButton className="button" value="Calculate">
             <h3>Calculate</h3>
           </ToggleButton>
         </ToggleButtonGroup>

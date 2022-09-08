@@ -1,6 +1,6 @@
 import React from "react";
 
-const Obstacle = ({ obstacle, size, color = "pink" }) => (
+const Obstacle = ({ obstacle, size, color = "#829CBC" }) => (
   <polygon
     points={obstacle.map((pos) => `${pos.x * size},${pos.y * size}`).join(" ")}
     fill={color}

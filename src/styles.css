@@ -10,11 +10,6 @@
   justify-content: center;
 }
 
-.container {
-  display: flex;
-  justify-content: space-around;
-}
-
 .AColor {
   color: #87ace0;
   margin-left: 3px;
@@ -25,10 +20,19 @@
   margin-left: 3px;
 }
 
+.button {
+  height: 8vh;
+}
+
+.buttons {
+  margin-top: 5vh;
+}
+
 header {
   height: 10vh;
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
 
 h3 {

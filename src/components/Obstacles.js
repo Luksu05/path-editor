@@ -8,7 +8,7 @@ const Obstacles = ({ obstacles, size }) => (
         key={(Math.random() + 1).toString(36).substring(7)}
         obstacle={obstacle}
         size={size}
-        color="red"
+        color="#1F487E"
       />
     ))}
   </React.Fragment>
