@@ -1,5 +1,5 @@
 .maindiv {
-  background-color: #020b2b;
+  background-color: #f4a5ae;
   height: 100vh;
   margin: 0;
 }
@@ -25,21 +25,14 @@
 }
 
 header {
-  background-color: #020b2b;
+  background-color: #f4a5ae;
   height: 10vh;
   display: flex;
   align-items: center;
 }
 
-button {
-  height: 8vh;
-  background-color: #0000ff;
-  display: flex;
-  align-items: center;
-}
-
 h3 {
-  color: azure;
+  color: #f5d7e3;
 }
 
 svg {

@@ -23,7 +23,7 @@ const App = () => {
   const [obstacle, setObstacle] = useState([]);
   const [bestPath, setBestPath] = useState([]);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const tileSize = 50;
+  const tileSize = 8;
   const gridSize = 100;
 
   useEffect(() => {
@@ -85,7 +85,12 @@ const App = () => {
   return (
     <div className="maindiv">
       <header className="container">
-        <ToggleButtonGroup value={mode} exclusive onChange={handleMode}>
+        <ToggleButtonGroup
+          value={mode}
+          exclusive
+          onChange={handleMode}
+          aria-label="toggle mode"
+        >
           <ToggleButton value="Obstacle">
             <h3>Make Obstacles</h3>
           </ToggleButton>
