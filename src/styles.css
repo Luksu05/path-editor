@@ -7,7 +7,7 @@
   height: 90vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .AColor {
@@ -26,6 +26,14 @@
 
 .buttons {
   margin-top: 5vh;
+}
+
+h1 {
+  color: #4674cf;
+  font-size: 300%;
+  letter-spacing: 0.6vw;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #3e4bde;
 }
 
 header {

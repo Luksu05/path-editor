@@ -111,32 +111,40 @@ const App = () => {
         </ToggleButtonGroup>
       </header>
       <div className="innerdiv">
-        <svg
-          viewBox="0 0 800 800"
-          height={windowHeight * 0.8}
-          xmlns="http://www.w3.org/2000/svg"
-          onMouseMove={handleMouse}
-          onClick={handleClick}
-        >
-          <rect width="100%" height="100%" fill="gray" />
-          <Grid width={tileSize} height={tileSize} size={gridSize} />
-          <Obstacles obstacles={obstacles} size={gridSize} />
-          <Obstacle obstacle={obstacle} size={gridSize} />
-          <Point
-            pointX={pointA.x}
-            pointY={pointA.y}
-            size={gridSize}
-            color="#87ace0"
-          />
-          <Point
-            pointX={pointB.x}
-            pointY={pointB.y}
-            size={gridSize}
-            color="#9187e0"
-          />
-          <Path bestPath={bestPath} />
-          <circle cx={pos.x} cy={pos.y} r="5" fill="red" />
-        </svg>
+        <div>
+          <h1>Path</h1>
+        </div>
+        <div>
+          <svg
+            viewBox="0 0 800 800"
+            height={windowHeight * 0.8}
+            xmlns="http://www.w3.org/2000/svg"
+            onMouseMove={handleMouse}
+            onClick={handleClick}
+          >
+            <rect width="100%" height="100%" fill="gray" />
+            <Grid width={tileSize} height={tileSize} size={gridSize} />
+            <Obstacles obstacles={obstacles} size={gridSize} />
+            <Obstacle obstacle={obstacle} size={gridSize} />
+            <Point
+              pointX={pointA.x}
+              pointY={pointA.y}
+              size={gridSize}
+              color="#87ace0"
+            />
+            <Point
+              pointX={pointB.x}
+              pointY={pointB.y}
+              size={gridSize}
+              color="#9187e0"
+            />
+            <Path bestPath={bestPath} />
+            <circle cx={pos.x} cy={pos.y} r="5" fill="red" />
+          </svg>
+        </div>
+        <div>
+          <h1>Editor</h1>
+        </div>
       </div>
     </div>
   );
