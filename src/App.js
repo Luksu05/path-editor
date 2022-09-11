@@ -47,12 +47,12 @@ const App = () => {
 
   const handleClick = () => {
     setBestPath([]);
-    lines = GetLines({ obstacles });
     const [x, y] = [pos.x / gridSize, pos.y / gridSize];
     switch (mode) {
       case "Obstacle":
         if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
           obstacles.push(obstacle);
+          lines = GetLines({ obstacles });
           setObstacle([]);
         } else {
           setObstacle([...obstacle, { x, y }]);
