@@ -47,21 +47,23 @@ const App = () => {
 
   const handleClick = () => {
     setBestPath([]);
-    if (mode === "Obstacle") {
-      const [x, y] = [pos.x / gridSize, pos.y / gridSize];
-      if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
-        obstacles.push(obstacle);
-        setObstacle([]);
-        lines = GetLines({ obstacles });
-      } else {
-        setObstacle([...obstacle, { x, y }]);
-      }
-    } else if (mode === "Point A") {
-      const [x, y] = [pos.x / gridSize, pos.y / gridSize];
-      setPointA({ x, y });
-    } else if (mode === "Point B") {
-      const [x, y] = [pos.x / gridSize, pos.y / gridSize];
-      setPointB({ x, y });
+    lines = GetLines({ obstacles });
+    const [x, y] = [pos.x / gridSize, pos.y / gridSize];
+    switch (mode) {
+      case "Obstacle":
+        if (obstacle.length && x === obstacle[0].x && y === obstacle[0].y) {
+          obstacles.push(obstacle);
+          setObstacle([]);
+        } else {
+          setObstacle([...obstacle, { x, y }]);
+        }
+        break;
+      case "Point A":
+        setPointA({ x, y });
+        break;
+      case "Point B":
+        setPointB({ x, y });
+        break;
     }
   };
 
