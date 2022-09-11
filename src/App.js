@@ -111,7 +111,7 @@ const App = () => {
         </ToggleButtonGroup>
       </header>
       <div className="innerdiv">
-        <div>
+        <div className="name-div">
           <h1>Path</h1>
         </div>
         <div>
@@ -142,7 +142,7 @@ const App = () => {
             <circle cx={pos.x} cy={pos.y} r="5" fill="red" />
           </svg>
         </div>
-        <div>
+        <div className="name-div">
           <h1>Editor</h1>
         </div>
       </div>
