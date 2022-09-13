@@ -3,11 +3,17 @@
   margin: 0;
 }
 
-.innerdiv {
-  height: 90vh;
+.path-editor-container {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  width: 100%;
+}
+
+.innerdiv {
+  height: 85vh;
+  display: flex;
+  align-items: flex-start;
 }
 
 .AColor {
@@ -25,8 +31,9 @@
 }
 
 .buttons {
-  margin-top: 5vh;
+  margin: auto;
   width: 90vw;
+  height: 7vh;
   justify-content: center;
 }
 
@@ -51,7 +58,7 @@ h1 {
 }
 
 header {
-  height: 10vh;
+  height: 15vh;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -59,10 +66,13 @@ header {
 
 h3 {
   color: #6290c8;
+  font-size: 2.5vw;
 }
 
 svg {
   outline: 2px #9d96b8 solid;
+  max-width: 80vw;
+  max-height: 80vw;
 }
 
 body {
