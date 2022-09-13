@@ -26,6 +26,8 @@
 
 .buttons {
   margin-top: 5vh;
+  width: 90vw;
+  justify-content: center;
 }
 
 .name-div {
