@@ -64,6 +64,8 @@ const App = () => {
       case "Point B":
         setPointB({ x, y });
         break;
+      default:
+        console.log("Error!");
     }
   };
 
