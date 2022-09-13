@@ -67,6 +67,8 @@ header {
 h3 {
   color: #6290c8;
   font-size: 2.5vw;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #3e4bde;
 }
 
 svg {
