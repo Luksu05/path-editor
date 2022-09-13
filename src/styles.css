@@ -73,6 +73,8 @@ svg {
   outline: 2px #9d96b8 solid;
   max-width: 80vw;
   max-height: 80vw;
+  min-width: 84vh;
+  min-height: 84vh;
 }
 
 body {
