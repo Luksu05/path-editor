@@ -11,6 +11,7 @@ import Algorithm from "./components/Algorithm";
 import "./styles.css";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import githubIcon from "./github-icon.png"
 
 let obstacles = [];
 let lines = [];
@@ -90,7 +91,10 @@ const App = () => {
 
   return (
     <div className="maindiv">
-      <header className="container">
+      <header>
+        <a href="https://github.com/parotax/path-editor">
+          <img src={githubIcon} />
+        </a>
         <ToggleButtonGroup
           value={mode}
           exclusive

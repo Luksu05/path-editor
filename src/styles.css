@@ -50,6 +50,13 @@
   }
 }
 
+a {
+  margin: 3vh;
+  height: 9vh;
+  position: absolute;
+  left: 0;
+}
+
 h1 {
   color: #4674cf;
   letter-spacing: 0.6vw;
