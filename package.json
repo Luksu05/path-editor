@@ -1,7 +1,7 @@
 {
   "name": "path-editor",
   "version": "0.1.0",
-  "homepage": "https://parotax.github.io/path-editor",
+  "homepage": "https://parotax.com/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -b master -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
