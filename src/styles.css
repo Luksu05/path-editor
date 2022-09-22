@@ -57,6 +57,11 @@ a {
   left: 0;
 }
 
+img {
+  height: 9vh;
+  max-height: 10vw;
+}
+
 h1 {
   color: #4674cf;
   letter-spacing: 0.6vw;
