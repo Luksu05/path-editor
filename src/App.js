@@ -18,8 +18,8 @@ let lines = [];
 
 const App = () => {
   const [mode, setMode] = React.useState("Obstacle");
-  const [pointA, setPointA] = useState({ x: 1, y: 1 });
-  const [pointB, setPointB] = useState({ x: 2, y: 2 });
+  const [pointA, setPointA] = useState({ x: -1, y: -1 });
+  const [pointB, setPointB] = useState({ x: -1, y: -1 });
   const [pos, setPos] = useState({ x: -10, y: -10 });
   const [obstacle, setObstacle] = useState([]);
   const [bestPath, setBestPath] = useState([]);
@@ -71,15 +71,19 @@ const App = () => {
   };
 
   const calculate = (pointA, pointB) => {
-    let points = GetPoints({ obstacles }, { pointA }, { pointB });
-    let graph = GetGraph(points, lines);
-    let last = Object.keys(graph)[Object.keys(graph).length - 1];
-    let path = Algorithm(graph, "aa", last.toString());
-    let bestPathFormat = [];
-    for (let i = 0; i < path.length; i++) {
-      bestPathFormat.push([points[path[i]].x, points[path[i]].y]);
+    if (pointA.x < 0 || pointB.x < 0) {
+      alert('Add both point A and B to calculate');
+    } else {
+      let points = GetPoints({ obstacles }, { pointA }, { pointB });
+      let graph = GetGraph(points, lines);
+      let last = Object.keys(graph)[Object.keys(graph).length - 1];
+      let path = Algorithm(graph, "aa", last.toString());
+      let bestPathFormat = [];
+      for (let i = 0; i < path.length; i++) {
+        bestPathFormat.push([points[path[i]].x, points[path[i]].y]);
+      }
+      setBestPath(bestPathFormat);
     }
-    setBestPath(bestPathFormat);
   };
 
   const handleMode = (event, newMode) => {
