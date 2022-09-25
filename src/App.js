@@ -135,6 +135,7 @@ const App = () => {
               <Grid width={tileSize} height={tileSize} size={gridSize} />
               <Obstacles obstacles={obstacles} size={gridSize} />
               <Obstacle obstacle={obstacle} size={gridSize} />
+              <Path bestPath={bestPath} />
               <Point
                 pointX={pointA.x}
                 pointY={pointA.y}
@@ -147,7 +148,6 @@ const App = () => {
                 size={gridSize}
                 color="#9187e0"
               />
-              <Path bestPath={bestPath} />
               <circle cx={pos.x} cy={pos.y} r="5" fill="red" />
             </svg>
           </div>
