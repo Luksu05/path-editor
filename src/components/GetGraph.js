@@ -7,10 +7,8 @@ const dist = (p1, p2) => {
 const getChr = (oldChr, index) => {
   oldChr = oldChr.split('');
 
-  if (index % 25 === 0) {
-    oldChr[1] = String.fromCharCode(97 + (index % 25));
-  }
-  oldChr[1] = String.fromCharCode(97 + index);
+  oldChr[0] = String.fromCharCode(97 + (Math.floor(index / 25)));
+  oldChr[1] = String.fromCharCode(97 + (index % 25));
   return oldChr.join('');
 }
 
