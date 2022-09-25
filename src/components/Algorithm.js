@@ -23,24 +23,24 @@ const formatGraph = (g) => {
 };
 
 const Algorithm = (graph, start, end) => {
-  var map = formatGraph(graph);
+  let map = formatGraph(graph);
 
-  var visited = [];
-  var unvisited = [start];
-  var shortestDistances = { [start]: { vertex: start, cost: 0 } };
+  let visited = [];
+  let unvisited = [start];
+  let shortestDistances = { [start]: { vertex: start, cost: 0 } };
 
-  var vertex;
+  let vertex;
   while ((vertex = unvisited.shift())) {
-    var neighbors = map[vertex].filter((n) => !visited.includes(n.vertex));
+    let neighbors = map[vertex].filter((n) => !visited.includes(n.vertex));
 
     unvisited.push(...neighbors.map((n) => n.vertex));
 
-    var costToVertex = shortestDistances[vertex].cost;
+    let costToVertex = shortestDistances[vertex].cost;
 
     for (let { vertex: to, cost } of neighbors) {
-      var currCostToNeighbor =
+      let currCostToNeighbor =
         shortestDistances[to] && shortestDistances[to].cost;
-      var newCostToNeighbor = costToVertex + cost;
+      let newCostToNeighbor = costToVertex + cost;
       if (
         currCostToNeighbor === undefined ||
         newCostToNeighbor < currCostToNeighbor
