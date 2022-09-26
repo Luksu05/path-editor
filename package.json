@@ -1,7 +1,7 @@
 {
   "name": "path-editor",
   "version": "0.1.0",
-  "homepage": "https://parotax.com/",
+  "homepage": "https://parotax.com/path-editor",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
